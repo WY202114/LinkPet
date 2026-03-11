@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.wzc.linkpet</groupId>
+        <artifactId>LinkPet</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>linkpet-service</artifactId>
+    <name>linkpet-service</name>
+    <description>业务逻辑层模块 - Service接口与实现类</description>
+
+    <dependencies>
+        <!-- 依赖 mapper 模块（间接引入了 model） -->
+        <dependency>
+            <groupId>com.wzc.linkpet</groupId>
+            <artifactId>linkpet-mapper</artifactId>
+        </dependency>
+        <!-- 依赖 common 模块（异常/工具类） -->
+        <dependency>
+            <groupId>com.wzc.linkpet</groupId>
+            <artifactId>linkpet-common</artifactId>
+        </dependency>
+        <!-- Spring Security（密码加密需要） -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+</project>

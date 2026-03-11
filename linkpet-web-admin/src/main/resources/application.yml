@@ -1,0 +1,45 @@
+server:
+  port: 8081                              # 管理端端口，与用户端 8080 区分
+
+spring:
+  application:
+    name: linkpet-web-admin
+
+  # ==================== 数据源 ====================
+  datasource:
+    url: jdbc:mysql://localhost:3306/linkpet?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # ==================== 文件上传大小限制 ====================
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+
+# ==================== MyBatis-Plus ====================
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml   # 扫描所有模块下的 XML 映射文件
+  type-aliases-package: com.wzc.linkpet.model.entity
+  configuration:
+    map-underscore-to-camel-case: true         # 数据库下划线字段自动映射到驼峰命名
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   # 开发阶段打印 SQL
+
+# ==================== MinIO ====================
+minio:
+  endpoint: http://localhost:9000           
+  access-key: minioadmin                   
+  secret-key: minioadmin                  
+  bucket-name: linkpet                     
+
+# ==================== JWT 配置 ====================
+linkpet:
+  jwt:
+    secret-key: Lp@2024AdminXx#secure!Key09abcABCdef
+    ttl-millis: 86400000                   # 24 小时（毫秒）
+
+# ==================== 日志 ====================
+logging:
+  level:
+    com.wzc.linkpet: debug

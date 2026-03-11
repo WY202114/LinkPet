@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.wzc.linkpet</groupId>
+    <artifactId>LinkPet</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>LinkPet</name>
+    <description>LinkPet - 宠物领养平台父项目</description>
+
+    <!-- 子模块列表 -->
+    <modules>
+        <module>linkpet-common</module>
+        <module>linkpet-model</module>
+        <module>linkpet-mapper</module>
+        <module>linkpet-service</module>
+        <module>linkpet-web-admin</module>
+        <module>linkpet-web-app</module>
+    </modules>
+
+    <!-- 继承 Spring Boot 父 POM，统一管理 Spring 生态依赖版本 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.3</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <mybatis-plus.version>3.5.5</mybatis-plus.version>
+        <jjwt.version>0.11.5</jjwt.version>
+        <minio.version>8.5.7</minio.version>
+        <lombok.version>1.18.30</lombok.version>
+        <knife4j.version>4.4.0</knife4j.version>
+    </properties>
+
+    <!--
+        dependencyManagement：统一声明所有依赖版本，子模块按需引入，无需写版本号。
+        这是多模块项目管理版本的最佳实践，避免版本冲突。
+    -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- ===== 内部子模块 ===== -->
+            <dependency>
+                <groupId>com.wzc.linkpet</groupId>
+                <artifactId>linkpet-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wzc.linkpet</groupId>
+                <artifactId>linkpet-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wzc.linkpet</groupId>
+                <artifactId>linkpet-mapper</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wzc.linkpet</groupId>
+                <artifactId>linkpet-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- ===== MyBatis-Plus ===== -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <!-- ===== JWT (io.jsonwebtoken) ===== -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jjwt.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+
+            <!-- ===== MinIO 对象存储 ===== -->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
+            </dependency>
+
+            <!-- ===== Lombok ===== -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <optional>true</optional>
+            </dependency>
+
+            <!-- ===== Knife4j API 文档 ===== -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <excludes>
+                            <exclude>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                            </exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

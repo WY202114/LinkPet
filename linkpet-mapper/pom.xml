@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.wzc.linkpet</groupId>
+        <artifactId>LinkPet</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>linkpet-mapper</artifactId>
+    <name>linkpet-mapper</name>
+    <description>数据访问层模块 - Mapper接口与XML映射文件</description>
+
+    <dependencies>
+        <!-- 依赖 model 模块（需要实体类） -->
+        <dependency>
+            <groupId>com.wzc.linkpet</groupId>
+            <artifactId>linkpet-model</artifactId>
+        </dependency>
+        <!-- MyBatis-Plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+        <!-- MySQL 驱动 -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+</project>

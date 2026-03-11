@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzc.linkpet.mapper.PetMapper">
+
+    <!-- 宠物 VO 结果映射（关联宠物类型名称与发布者昵称） -->
+    <resultMap id="PetVOMap" type="com.wzc.linkpet.model.vo.PetVO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="type_id" property="typeId"/>
+        <result column="type_name" property="typeName"/>
+        <result column="age_month" property="ageMonth"/>
+        <result column="gender" property="gender"/>
+        <result column="health_desc" property="healthDesc"/>
+        <result column="personality_desc" property="personalityDesc"/>
+        <result column="images" property="images"/>
+        <result column="address" property="address"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_nickname" property="userNickname"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!--
+        分页查询宠物列表，LEFT JOIN pet_type 获取类型名称，LEFT JOIN user 获取发布者昵称
+        使用 <where> + <if> 动态拼接可选筛选条件，避免 WHERE 1=1 硬编码
+    -->
+    <select id="selectPetPage" resultMap="PetVOMap">
+        SELECT p.id,
+               p.name,
+               p.type_id,
+               pt.name AS type_name,
+               p.age_month,
+               p.gender,
+               p.health_desc,
+               p.personality_desc,
+               p.images,
+               p.address,
+               p.user_id,
+               u.nickname AS user_nickname,
+               p.status,
+               p.create_time
+        FROM pet p
+                 LEFT JOIN pet_type pt ON p.type_id = pt.id
+                 LEFT JOIN user u ON p.user_id = u.id
+        <where>
+            <if test="query.typeId != null">
+                AND p.type_id = #{query.typeId}
+            </if>
+            <if test="query.gender != null">
+                AND p.gender = #{query.gender}
+            </if>
+            <if test="query.status != null">
+                AND p.status = #{query.status}
+            </if>
+            <if test="query.keyword != null and query.keyword != ''">
+                AND p.name LIKE CONCAT('%', #{query.keyword}, '%')
+            </if>
+        </where>
+        ORDER BY p.create_time DESC
+    </select>
+
+</mapper>
