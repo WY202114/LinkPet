@@ -12,8 +12,9 @@
         <result column="gender" property="gender"/>
         <result column="health_desc" property="healthDesc"/>
         <result column="personality_desc" property="personalityDesc"/>
-        <result column="images" property="images"/>
+        <result column="images" property="images" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
         <result column="address" property="address"/>
+        <result column="location" property="location"/>
         <result column="user_id" property="userId"/>
         <result column="user_nickname" property="userNickname"/>
         <result column="status" property="status"/>
@@ -35,6 +36,7 @@
                p.personality_desc,
                p.images,
                p.address,
+               p.location,
                p.user_id,
                u.nickname AS user_nickname,
                p.status,

@@ -3,6 +3,7 @@ package com.wzc.linkpet.model.vo;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 宠物详情 VO
@@ -19,8 +20,9 @@ public class PetVO {
     private String genderDesc;    // 性别文字描述
     private String healthDesc;
     private String personalityDesc;
-    private String images;
+    private List<String> images;
     private String address;
+    private String location;
     private Long userId;
     private String userNickname;  // 发布者昵称
     private Integer status;

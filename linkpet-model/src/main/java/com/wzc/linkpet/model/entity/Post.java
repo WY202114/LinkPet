@@ -1,16 +1,18 @@
 package com.wzc.linkpet.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 社区帖子实体类
  * 对应数据库表：post
  */
 @Data
-@TableName("post")
+@TableName(value = "post", autoResultMap = true)
 public class Post {
 
     /** 主键 */
@@ -26,8 +28,9 @@ public class Post {
     /** 帖子正文内容 */
     private String content;
 
-    /** 图片列表（MinIO 对象名称，多张逗号分隔） */
-    private String images;
+    /** 图片列表（JSON 数组存储） */
+    @TableField(typeHandler = JacksonTypeHandler.class)
+    private List<String> images;
 
     /** 话题标签（逗号分隔） */
     private String tags;

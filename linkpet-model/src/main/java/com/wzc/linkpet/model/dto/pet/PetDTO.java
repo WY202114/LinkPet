@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * 发布/编辑宠物请求 DTO
  */
@@ -30,10 +32,13 @@ public class PetDTO {
     /** 性格描述 */
     private String personalityDesc;
 
-    /** 图片列表（逗号分隔的 MinIO 对象名称） */
-    private String images;
+    /** 图片列表（JSON 数组存储） */
+    private List<String> images;
 
     /** 所在地址 */
     @NotBlank(message = "地址不能为空")
     private String address;
+
+    /** 发现地点（选填，适用于流浪动物） */
+    private String location;
 }

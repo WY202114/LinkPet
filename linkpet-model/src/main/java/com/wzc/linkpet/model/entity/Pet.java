@@ -1,16 +1,18 @@
 package com.wzc.linkpet.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 宠物实体类
  * 对应数据库表：pet
  */
 @Data
-@TableName("pet")
+@TableName(value = "pet", autoResultMap = true)
 public class Pet {
 
     /** 主键 */
@@ -35,11 +37,15 @@ public class Pet {
     /** 性格描述 */
     private String personalityDesc;
 
-    /** 宠物图片（MinIO 对象名称，多张逗号分隔） */
-    private String images;
+    /** 宠物图片（JSON 数组存储） */
+    @TableField(typeHandler = JacksonTypeHandler.class)
+    private List<String> images;
 
     /** 所在地址 */
     private String address;
+
+    /** 发现地点（适用于流浪动物） */
+    private String location;
 
     /** 发布用户 ID */
     private Long userId;

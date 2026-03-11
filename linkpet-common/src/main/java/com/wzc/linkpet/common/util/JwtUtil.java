@@ -1,6 +1,7 @@
 package com.wzc.linkpet.common.util;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -44,7 +45,7 @@ public class JwtUtil {
         Date now = new Date(nowMillis);
         Date expiration = new Date(nowMillis + ttlMillis);
 
-        var builder = Jwts.builder()
+        JwtBuilder builder = Jwts.builder()
                 .setSubject(subject)
                 .setIssuedAt(now)
                 .setExpiration(expiration)

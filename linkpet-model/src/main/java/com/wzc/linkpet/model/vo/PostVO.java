@@ -3,6 +3,7 @@ package com.wzc.linkpet.model.vo;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 帖子 VO
@@ -16,7 +17,7 @@ public class PostVO {
     private String userAvatar;
     private String title;
     private String content;
-    private String images;
+    private List<String> images;
     private String tags;
     private Integer likeCount;
     private Integer commentCount;

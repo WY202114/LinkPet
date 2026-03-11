@@ -31,12 +31,17 @@
 
     <properties>
         <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mybatis-plus.version>3.5.5</mybatis-plus.version>
-        <jjwt.version>0.11.5</jjwt.version>
-        <minio.version>8.5.7</minio.version>
+        <swagger.version>2.9.2</swagger.version>
+        <jwt.version>0.11.2</jwt.version>
+        <easycaptcha.version>1.6.2</easycaptcha.version>
+        <minio.version>8.2.0</minio.version>
+        <knife4j.version>4.1.0</knife4j.version>
+        <aliyun.sms.version>2.0.23</aliyun.sms.version>
         <lombok.version>1.18.30</lombok.version>
-        <knife4j.version>4.4.0</knife4j.version>
     </properties>
 
     <!--
@@ -70,7 +75,7 @@
             <!-- ===== MyBatis-Plus ===== -->
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
 
@@ -78,19 +83,26 @@
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt-api</artifactId>
-                <version>${jjwt.version}</version>
+                <version>${jwt.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt-impl</artifactId>
-                <version>${jjwt.version}</version>
+                <version>${jwt.version}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt-jackson</artifactId>
-                <version>${jjwt.version}</version>
+                <version>${jwt.version}</version>
                 <scope>runtime</scope>
+            </dependency>
+
+            <!--图形验证码-->
+            <dependency>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>${easycaptcha.version}</version>
             </dependency>
 
             <!-- ===== MinIO 对象存储 ===== -->
@@ -100,12 +112,19 @@
                 <version>${minio.version}</version>
             </dependency>
 
+            <!--阿里云短信客户端，用于发送短信验证码-->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>dysmsapi20170525</artifactId>
+                <version>${aliyun.sms.version}</version>
+            </dependency>
+
             <!-- ===== Lombok ===== -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
-                <optional>true</optional>
+                <scope>provided</scope>
             </dependency>
 
             <!-- ===== Knife4j API 文档 ===== -->
