@@ -18,8 +18,9 @@ public class PetVO {
     private Integer ageMonth;
     private Integer gender;
     private String genderDesc;    // 性别文字描述
-    private String healthDesc;
-    private String personalityDesc;
+//    private String healthDesc;
+//    private String personalityDesc;
+    private String description;
     private List<String> images;
     private String address;
     private String location;

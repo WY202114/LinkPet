@@ -10,8 +10,9 @@
         <result column="type_name" property="typeName"/>
         <result column="age_month" property="ageMonth"/>
         <result column="gender" property="gender"/>
-        <result column="health_desc" property="healthDesc"/>
-        <result column="personality_desc" property="personalityDesc"/>
+<!--        <result column="health_desc" property="healthDesc"/>-->
+<!--        <result column="personality_desc" property="personalityDesc"/>-->
+        <result column="description" property="description"/>
         <result column="images" property="images" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
         <result column="address" property="address"/>
         <result column="location" property="location"/>
@@ -32,8 +33,7 @@
                pt.name AS type_name,
                p.age_month,
                p.gender,
-               p.health_desc,
-               p.personality_desc,
+               p.description,
                p.images,
                p.address,
                p.location,

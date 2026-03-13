@@ -20,7 +20,7 @@ spring:
 
 # ==================== MyBatis-Plus ====================
 mybatis-plus:
-  mapper-locations: classpath*:mapper/*.xml   # 扫描所有模块下的 XML 映射文件
+  mapper-locations: classpath*:mapper/**/*.xml  # ** 匹配任意层级  # 扫描所有模块下的 XML 映射文件
   type-aliases-package: com.wzc.linkpet.model.entity
   configuration:
     map-underscore-to-camel-case: true
