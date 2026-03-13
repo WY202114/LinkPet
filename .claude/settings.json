@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/wuyun/xm/LinkPet/**)"
+    ],
+    "additionalDirectories": [
+      "D:\\wuyun\\xm\\LinkPet\\src\\views\\home\\components"
+    ]
+  }
+}
