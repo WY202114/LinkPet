@@ -1,0 +1,112 @@
+/**
+ * LinkPet — 模拟数据
+ * 包含：待领养宠物列表、社区故事列表、筛选标签
+ */
+
+export const filterTabs = [
+  { label: '🐾 All Pets', value: 'all' },
+  { label: '🐱 Cats',     value: 'cat' },
+  { label: '🐶 Dogs',     value: 'dog' },
+]
+
+export const pets = [
+  {
+    id: 1,
+    name: 'Mochi',
+    type: 'Cat',
+    typeKey: 'cat',
+    age: '1 year',
+    location: 'Chaoyang, Beijing',
+    tags: ['Clingy', 'Indoor', 'Playful'],
+    desc: 'Mochi loves to curl up in laps and chirp at sparrows through the window. She arrived thin and frightened — now she purrs like a little engine.',
+    image: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&q=80',
+    urgent: false,
+  },
+  {
+    id: 2,
+    name: 'Biscuit',
+    type: 'Dog',
+    typeKey: 'dog',
+    age: '3 years',
+    location: 'Pudong, Shanghai',
+    tags: ['Gentle', 'Kid-Friendly', 'Leash-Trained'],
+    desc: 'Biscuit was found wandering near a highway. This golden boy is calm, loyal, and already knows "sit" and "shake." He just needs somewhere to call home.',
+    image: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=500&q=80',
+    urgent: true,
+  },
+  {
+    id: 3,
+    name: 'Ink',
+    type: 'Cat',
+    typeKey: 'cat',
+    age: '2 years',
+    location: 'Tianhe, Guangzhou',
+    tags: ['Quiet', 'Independent', 'Elegant'],
+    desc: 'Ink is a contemplative soul who observes the world from high perches. He communicates through slow blinks and gentle headbutts. A perfect companion for a calm home.',
+    image: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=500&q=80',
+    urgent: false,
+  },
+  {
+    id: 4,
+    name: 'Noodle',
+    type: 'Dog',
+    typeKey: 'dog',
+    age: '8 months',
+    location: 'Jiangbei, Chongqing',
+    tags: ['Energetic', 'Curious', 'Social'],
+    desc: 'Noodle bounces through life with irrepressible joy. She learned to sit in two days and greets every new friend with a wagging tail the speed of light.',
+    image: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=500&q=80',
+    urgent: false,
+  },
+]
+
+export const stories = [
+  {
+    id: 1,
+    title: 'How a Three-Legged Stray Taught Me to Walk Again',
+    tag: 'Adoption Diary',
+    excerpt: 'I found Tripod limping near my apartment last February. The vet said he\'d never run. We both proved them wrong. Six months later, we completed our first 5K together. This is our story.',
+    author: 'Li Yueming',
+    date: 'Nov 12, 2024',
+    likes: 1024,
+    comments: 87,
+    image: 'https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=700&q=80',
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=80&q=80',
+  },
+  {
+    id: 2,
+    title: 'Midnight and the Empty Nest',
+    tag: 'Daily Pet Life',
+    excerpt: 'After our youngest left for university, the house felt hollow. Then a tiny black cat showed up at our door on a rainy Tuesday.',
+    author: 'Wang Fang',
+    date: 'Oct 28, 2024',
+    likes: 562,
+    comments: 41,
+    image: 'https://images.unsplash.com/photo-1506555191898-aef7ad9d8d0c?w=500&q=80',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80',
+  },
+  {
+    id: 3,
+    title: 'Rescue Squad: 2AM, a Highway, and Seven Puppies',
+    tag: 'Rescue Story',
+    excerpt: 'We got the call at 2 AM. By the time we reached the highway, a mother dog and seven puppies huddled in the rain. Every single one found a home within a week.',
+    author: 'Chen Jiahao',
+    date: 'Oct 15, 2024',
+    likes: 2103,
+    comments: 156,
+    image: 'https://images.unsplash.com/photo-1583511655826-05700442b0ae?w=500&q=80',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80',
+  },
+  {
+    id: 4,
+    title: 'Two Cats, One Tiny Studio, Infinite Joy',
+    tag: 'Daily Pet Life',
+    excerpt: 'People said you can\'t keep two cats in 35 square meters. Bao and Zi disagree loudly at 3 AM every night.',
+    author: 'Zhang Xin',
+    date: 'Sep 30, 2024',
+    likes: 847,
+    comments: 73,
+    image: 'https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=500&q=80',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80',
+  },
+]

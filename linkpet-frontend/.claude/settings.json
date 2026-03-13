@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "additionalDirectories": [
+      "d:\\wuyun\\xm\\LinkPet"
+    ],
+    "allow": [
+      "Bash(powershell -Command \"Rename-Item -Path ''D:\\\\wuyun\\\\xm\\\\LinkPet'' -NewName ''linkpet-frontend''\")"
+    ]
+  }
+}
