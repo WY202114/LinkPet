@@ -29,12 +29,13 @@ public class MinioUtil {
      * @param bucketName  存储桶名称
      * @param objectName  对象名称（含路径，如 "pet/avatar/xxx.jpg"）
      * @param inputStream 文件输入流
+     * @param size        文件大小
      * @param contentType 文件 MIME 类型（如 "image/jpeg"）
      * @return 文件访问路径（对象名称）
      * @throws RuntimeException 上传失败时抛出
      */
     public static String upload(MinioClient minioClient, String bucketName,
-                                String objectName, InputStream inputStream, String contentType) {
+                                String objectName, InputStream inputStream, long size, String contentType) {
         try {
             // 检查存储桶是否存在，不存在则创建
             boolean found = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
@@ -47,7 +48,7 @@ public class MinioUtil {
                     PutObjectArgs.builder()
                             .bucket(bucketName)
                             .object(objectName)
-                            .stream(inputStream, inputStream.available(), -1)
+                            .stream(inputStream, size, -1)
                             .contentType(contentType)
                             .build()
             );

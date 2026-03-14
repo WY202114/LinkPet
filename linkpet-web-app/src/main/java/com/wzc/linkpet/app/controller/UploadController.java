@@ -52,6 +52,7 @@ public class UploadController {
                     bucketName,
                     objectName,
                     file.getInputStream(),
+                    file.getSize(),
                     file.getContentType()
             );
             return Result.success(result);

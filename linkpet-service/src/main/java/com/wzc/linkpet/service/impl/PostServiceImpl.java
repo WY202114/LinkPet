@@ -8,8 +8,10 @@ import com.wzc.linkpet.common.exception.ErrorCode;
 import com.wzc.linkpet.common.result.PageResult;
 import com.wzc.linkpet.mapper.PostMapper;
 import com.wzc.linkpet.mapper.UserActionMapper;
+import com.wzc.linkpet.mapper.UserMapper;
 import com.wzc.linkpet.model.dto.post.PostDTO;
 import com.wzc.linkpet.model.entity.Post;
+import com.wzc.linkpet.model.entity.User;
 import com.wzc.linkpet.model.entity.UserAction;
 import com.wzc.linkpet.model.vo.PostVO;
 import com.wzc.linkpet.service.PostService;
@@ -30,6 +32,7 @@ public class PostServiceImpl implements PostService {
 
     private final PostMapper postMapper;
     private final UserActionMapper userActionMapper;
+    private final UserMapper userMapper;
 
     @Override
     public PageResult<PostVO> pageQuery(String keyword, int page, int pageSize) {
@@ -42,6 +45,11 @@ public class PostServiceImpl implements PostService {
         List<PostVO> vos = pageResult.getRecords().stream().map(p -> {
             PostVO vo = new PostVO();
             BeanUtils.copyProperties(p, vo);
+            User user = userMapper.selectById(p.getUserId());
+            if (user != null) {
+                vo.setUserNickname(user.getNickname());
+                vo.setUserAvatar(user.getAvatar());
+            }
             return vo;
         }).collect(Collectors.toList());
         return new PageResult<>(vos, pageResult.getTotal());
@@ -55,6 +63,11 @@ public class PostServiceImpl implements PostService {
         }
         PostVO vo = new PostVO();
         BeanUtils.copyProperties(post, vo);
+        User user = userMapper.selectById(post.getUserId());
+        if (user != null) {
+            vo.setUserNickname(user.getNickname());
+            vo.setUserAvatar(user.getAvatar());
+        }
         return vo;
     }
 

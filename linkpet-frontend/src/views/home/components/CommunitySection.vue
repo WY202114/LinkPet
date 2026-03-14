@@ -3,12 +3,17 @@
     <!-- Section header -->
     <div class="section__header">
       <p class="section__tag">From our LinkPet family</p>
-      <h2 class="section__title">Heartwarming Stories</h2>
+      <h2 class="section__title">温馨故事</h2>
       <p class="section__desc">
-        Real moments, real love — diaries written by the community that proves
-        every stray deserves a second chance.
+        真实瞬间，真爱 — 社区成员写下的日记，证明每一只流浪动物都值得第二次机会。
       </p>
+      <div class="community-actions">
+        <button class="btn-cta btn-cta--light" @click="openAddPost">✍️ 发布分享</button>
+      </div>
     </div>
+
+    <!-- Add Post Modal -->
+    <AddPostModal :visible="showAddModal" @close="showAddModal = false" @success="onPostAdded" />
 
     <!-- Loading skeleton -->
     <div v-if="loading" class="posts-grid">
@@ -55,10 +60,12 @@ import { ref, onMounted } from 'vue'
 import { getPosts } from '@/api/posts.js'
 import { formatPost } from '@/utils/format.js'
 import { stories as mockStories } from '@/data/mockData.js'
+import AddPostModal from './AddPostModal.vue'
 
 const postList = ref([])
 const loading  = ref(false)
 const error    = ref('')
+const showAddModal = ref(false)
 
 const fetchPosts = async () => {
   loading.value = true
@@ -75,9 +82,27 @@ const fetchPosts = async () => {
 }
 
 onMounted(fetchPosts)
+
+// ── Add Post ───────────────────────────────────────────────────
+const openAddPost = () => {
+  const token = localStorage.getItem('lp_token')
+  if (!token) {
+    alert('请先登录后再发布故事')
+    return
+  }
+  showAddModal.value = true
+}
+
+const onPostAdded = () => {
+  showAddModal.value = false
+  fetchPosts()
+}
 </script>
 
 <style scoped>
+.community-actions {
+  margin-top: 1.5rem;
+}
 /* Post cards grid — same layout as adoption */
 .posts-grid {
   display: grid;
