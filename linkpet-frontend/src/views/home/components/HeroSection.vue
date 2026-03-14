@@ -82,6 +82,7 @@
   justify-content: center;
   overflow: hidden;
   padding: 1rem 2rem;
+  background: linear-gradient(160deg, #DEB87A 0%, #C9965A 35%, #8FA878 65%, #C4A455 100%);
 }
 
 /* ── Painterly background ── */
@@ -210,7 +211,7 @@
   backdrop-filter: blur(14px);
   border-radius: 60px;
   border: 1px solid rgba(196, 127, 53, 0.25);
-  box-shadow: 0 8px 32px var(--warm-shadow);
+  box-shadow: 0 4px 16px var(--warm-shadow);
 }
 .stat-item { text-align: center; }
 .stat-item__num {
