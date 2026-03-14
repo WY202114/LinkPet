@@ -188,7 +188,7 @@
   line-height: 1.75;
   color: var(--brown-mid);
   max-width: 560px;
-  margin: 0 auto 1.5rem;
+  margin: 0 auto 1rem;
   opacity: 0.9;
 }
 
@@ -197,15 +197,15 @@
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 /* ── Stats bar ── */
 .hero__stats {
   display: inline-flex;
   align-items: center;
-  gap: 2rem;
-  padding: 1.2rem 2.5rem;
+  gap: 1.5rem;
+  padding: 0.8rem 2rem;
   background: rgba(247, 237, 216, 0.55);
   backdrop-filter: blur(14px);
   border-radius: 60px;
@@ -216,7 +216,7 @@
 .stat-item__num {
   display: block;
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--amber-dark);
 }
@@ -229,7 +229,7 @@
 }
 .stat-sep {
   width: 1px;
-  height: 36px;
+  height: 28px;
   background: rgba(196, 127, 53, 0.3);
 }
 

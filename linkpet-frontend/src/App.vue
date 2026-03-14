@@ -24,7 +24,7 @@ const noScroll = computed(() => route.path === '/')
 }
 .page-main--no-scroll {
   height: calc(100vh - 70px);
-  max-height: calc(100vh - 70px);
   overflow: hidden;
+  background: transparent;
 }
 </style>
