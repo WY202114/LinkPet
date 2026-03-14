@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS pet (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL COMMENT '宠物名称',
     type_id BIGINT NOT NULL COMMENT '分类ID',
-    age VARCHAR(20) COMMENT '年龄',
+    age_month INT COMMENT '年龄（月）',
     gender INT COMMENT '性别: 0-母, 1-公, 2-未知',
     description TEXT COMMENT '描述',
     images JSON COMMENT '宠物图片',

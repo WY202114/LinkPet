@@ -36,7 +36,15 @@
     <div v-else class="posts-grid">
       <div v-for="post in postList" :key="post.id" class="post-card">
         <div class="post-card__img-wrap">
-          <img :src="post.image" :alt="post.title" class="post-card__img" />
+          <img :src="post.image" :alt="post.title" class="post-card__img" @error="onImgError" />
+          <button
+            v-if="isAdmin"
+            class="post-card__delete"
+            title="Delete post"
+            @click.stop="handleDelete(post)"
+          >
+            &times;
+          </button>
         </div>
         <div class="post-card__body">
           <h3 class="post-card__title">{{ post.title }}</h3>
@@ -51,14 +59,32 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { getPosts } from '@/api/posts.js'
+import { ref, computed, onMounted } from 'vue'
+import { getPosts, deletePost } from '@/api/posts.js'
 import { formatPost } from '@/utils/format.js'
 import { stories as mockStories } from '@/data/mockData.js'
+import { useUserStore } from '@/store/user.js'
+
+const { state: userState } = useUserStore()
+const isAdmin = computed(() => userState.userInfo?.role === 'ROLE_ADMIN')
 
 const postList = ref([])
 const loading  = ref(false)
 const error    = ref('')
+
+const handleDelete = async (post) => {
+  if (!confirm(`确定删除「${post.title}」吗？`)) return
+  try {
+    await deletePost(post.id)
+    postList.value = postList.value.filter(p => p.id !== post.id)
+  } catch (e) {
+    alert('删除失败：' + (e.message || '未知错误'))
+  }
+}
+
+const onImgError = (e) => {
+  e.target.src = 'https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=700&q=80'
+}
 
 const fetchPosts = async () => {
   loading.value = true
@@ -120,6 +146,28 @@ onMounted(fetchPosts)
   filter: sepia(18%) saturate(115%) contrast(108%) brightness(96%) hue-rotate(5deg);
 }
 .post-card:hover .post-card__img { transform: scale(1.07); }
+
+/* Delete button (admin only) */
+.post-card__delete {
+  position: absolute;
+  top: 6px; right: 6px;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(180, 40, 40, 0.85);
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 2;
+}
+.post-card:hover .post-card__delete { opacity: 1; }
+.post-card__delete:hover { transform: scale(1.15); background: rgba(180, 40, 40, 1); }
 
 .post-card__body {
   padding: 0.5rem 0.75rem 0.6rem;
