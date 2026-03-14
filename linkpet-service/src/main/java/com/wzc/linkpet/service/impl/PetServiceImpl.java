@@ -76,4 +76,15 @@ public class PetServiceImpl implements PetService {
         pet.setStatus(StatusConstant.PET_OFFLINE);
         petMapper.updateById(pet);
     }
+
+    @Override
+    public PageResult<PetVO> myPets(int page, int pageSize) {
+        PetQueryDTO query = new PetQueryDTO();
+        query.setPage(page);
+        query.setPageSize(pageSize);
+        query.setUserId(BaseContext.getCurrentId());
+        Page<PetVO> pageObj = new Page<>(page, pageSize);
+        Page<PetVO> result = (Page<PetVO>) petMapper.selectPetPage(pageObj, query);
+        return new PageResult<>(result.getRecords(), result.getTotal());
+    }
 }

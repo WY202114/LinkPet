@@ -43,7 +43,7 @@
         <div class="post-card__img-wrap">
           <img :src="post.image" :alt="post.title" class="post-card__img" @error="onImgError" />
           <button
-            v-if="isAdmin"
+            v-if="canDelete(post)"
             class="post-card__delete"
             title="Delete post"
             @click.stop="handleDelete(post)"
@@ -73,6 +73,8 @@ import { useUserStore } from '@/store/user.js'
 
 const { state: userState } = useUserStore()
 const isAdmin = computed(() => userState.userInfo?.role === 'ROLE_ADMIN')
+const currentUserId = computed(() => userState.userInfo?.id)
+const canDelete = (post) => isAdmin.value || String(post.userId) === String(currentUserId.value)
 
 const postList = ref([])
 const loading  = ref(false)

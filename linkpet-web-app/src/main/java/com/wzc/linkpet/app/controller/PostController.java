@@ -64,4 +64,12 @@ public class PostController {
         postService.toggleLike(id);
         return Result.success();
     }
+
+    @Operation(summary = "我发布的帖子列表（需登录）")
+    @GetMapping("/my")
+    public Result<PageResult<PostVO>> myPosts(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int pageSize) {
+        return Result.success(postService.myPosts(page, pageSize));
+    }
 }

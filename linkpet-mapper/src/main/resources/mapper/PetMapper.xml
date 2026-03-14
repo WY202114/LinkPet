@@ -57,6 +57,9 @@
             <if test="query.keyword != null and query.keyword != ''">
                 AND p.name LIKE CONCAT('%', #{query.keyword}, '%')
             </if>
+            <if test="query.userId != null">
+                AND p.user_id = #{query.userId}
+            </if>
         </where>
         ORDER BY p.create_time DESC
     </select>

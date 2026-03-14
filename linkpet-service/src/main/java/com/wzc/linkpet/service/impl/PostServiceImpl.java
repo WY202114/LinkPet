@@ -146,4 +146,23 @@ public class PostServiceImpl implements PostService {
         }
         postMapper.updateById(post);
     }
+
+    @Override
+    public PageResult<PostVO> myPosts(int page, int pageSize) {
+        Long userId = BaseContext.getCurrentId();
+        LambdaQueryWrapper<Post> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Post::getUserId, userId).orderByDesc(Post::getCreateTime);
+        Page<Post> pageResult = postMapper.selectPage(new Page<>(page, pageSize), wrapper);
+        List<PostVO> vos = pageResult.getRecords().stream().map(p -> {
+            PostVO vo = new PostVO();
+            BeanUtils.copyProperties(p, vo);
+            User user = userMapper.selectById(p.getUserId());
+            if (user != null) {
+                vo.setUserNickname(user.getNickname());
+                vo.setUserAvatar(user.getAvatar());
+            }
+            return vo;
+        }).collect(Collectors.toList());
+        return new PageResult<>(vos, pageResult.getTotal());
+    }
 }

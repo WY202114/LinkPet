@@ -26,4 +26,7 @@ public interface PostService {
 
     /** 点赞/取消点赞 */
     void toggleLike(Long postId);
+
+    /** 查询当前用户发布的帖子列表 */
+    PageResult<PostVO> myPosts(int page, int pageSize);
 }

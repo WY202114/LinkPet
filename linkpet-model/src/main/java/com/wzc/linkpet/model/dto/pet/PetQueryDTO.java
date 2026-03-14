@@ -20,6 +20,9 @@ public class PetQueryDTO {
     /** 搜索关键词（宠物名称模糊匹配） */
     private String keyword;
 
+    /** 发布用户 ID（用于"我的宠物"查询） */
+    private Long userId;
+
     /** 当前页，从 1 开始，默认 1 */
     private int page = 1;
 

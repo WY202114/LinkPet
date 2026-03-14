@@ -42,8 +42,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // 认证接口公开
                         .requestMatchers("/auth/**").permitAll()
-                        // 宠物/类型浏览对访客开放
-                        .requestMatchers("/pets/**", "/pet-types/**", "/stats/**").permitAll()
+                        // "我的"接口需要登录（必须放在 /pets/** 之前）
+                        .requestMatchers("/pets/my", "/posts/my").authenticated()
+                        // 宠物/帖子/类型浏览对访客开放
+                        .requestMatchers("/pets/**", "/pet-types/**", "/stats/**", "/posts/**").permitAll()
                         // Knife4j 文档
                         .requestMatchers("/doc.html", "/webjars/**", "/v3/api-docs/**").permitAll()
                         // 其余接口需要登录

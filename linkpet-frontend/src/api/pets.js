@@ -40,3 +40,10 @@ export const updatePet = (id, data) => http.put(`/pets/${id}`, data)
  * @param {number} id
  */
 export const deletePet = (id) => http.delete(`/pets/${id}`)
+
+/**
+ * 获取当前用户发布的宠物列表
+ * @param {{ page?, pageSize? }} params
+ */
+export const getMyPets = (params = {}) =>
+  http.get('/pets/my', { params: { page: 1, pageSize: 10, ...params } })

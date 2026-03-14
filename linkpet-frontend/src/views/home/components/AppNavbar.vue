@@ -33,8 +33,7 @@
           <Transition name="fade">
             <div v-if="userMenuOpen" class="user-dropdown">
               <p class="user-dropdown__name">{{ userStore.state.userInfo?.username }}</p>
-              <a href="#" class="user-dropdown__item">My Adoptions</a>
-              <a href="#" class="user-dropdown__item">My Posts</a>
+              <router-link to="/profile" class="user-dropdown__item" @click="userMenuOpen = false">My Profile</router-link>
               <button class="user-dropdown__logout" @click="handleLogout">Log Out</button>
             </div>
           </Transition>
@@ -61,6 +60,7 @@
           </template>
           <template v-else>
             <span class="mobile-user">Hi, {{ userStore.state.userInfo?.nickname }}</span>
+            <router-link to="/profile" class="btn-login" style="text-decoration:none;text-align:center" @click="mobileOpen = false">My Profile</router-link>
             <button class="btn-login" @click="handleLogout">Log Out</button>
           </template>
         </div>

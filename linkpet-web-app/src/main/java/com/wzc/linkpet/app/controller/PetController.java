@@ -55,4 +55,12 @@ public class PetController {
         petService.delete(id);
         return Result.success();
     }
+
+    @Operation(summary = "我发布的宠物列表（需登录）")
+    @GetMapping("/my")
+    public Result<PageResult<PetVO>> myPets(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int pageSize) {
+        return Result.success(petService.myPets(page, pageSize));
+    }
 }

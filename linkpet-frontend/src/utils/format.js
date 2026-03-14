@@ -64,6 +64,7 @@ export const formatPet = (pet, index = 0) => ({
  */
 export const formatPost = (post, index = 0) => ({
   id:       post.id,
+  userId:   post.userId,
   title:    post.title,
   tag:      post.tags?.split(',')[0]?.trim() || 'Story',
   excerpt:  post.content

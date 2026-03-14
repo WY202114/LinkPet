@@ -47,3 +47,10 @@ export const deletePost = (id) => http.delete(`/posts/${id}`)
  * @param {number} id
  */
 export const likePost = (id) => http.post(`/posts/${id}/like`)
+
+/**
+ * 获取当前用户发布的帖子列表
+ * @param {{ page?, pageSize? }} params
+ */
+export const getMyPosts = (params = {}) =>
+  http.get('/posts/my', { params: { page: 1, pageSize: 10, ...params } })

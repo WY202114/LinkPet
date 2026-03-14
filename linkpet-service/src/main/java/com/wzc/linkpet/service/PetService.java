@@ -34,4 +34,9 @@ public interface PetService {
      * 下架/删除宠物
      */
     void delete(Long id);
+
+    /**
+     * 查询当前用户发布的宠物列表
+     */
+    PageResult<PetVO> myPets(int page, int pageSize);
 }

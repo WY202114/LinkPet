@@ -25,6 +25,12 @@ const routes = [
     component: () => import('@/views/guide/index.vue'),
     meta: { title: 'LinkPet — 救助指南' },
   },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('@/views/profile/index.vue'),
+    meta: { title: 'LinkPet — 个人中心' },
+  },
 ]
 
 const router = createRouter({
