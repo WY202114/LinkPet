@@ -4,9 +4,12 @@
  */
 
 export const filterTabs = [
-  { label: '🐾 All Pets', value: 'all' },
-  { label: '🐱 Cats',     value: 'cat' },
-  { label: '🐶 Dogs',     value: 'dog' },
+  { label: '🐾 所有宠物', value: 'all' },
+  { label: '🐱 猫',     value: '1' },
+  { label: '🐶 狗',     value: '2' },
+  { label: '🐦 鸟',     value: '3' },
+  { label: '🦗 蝈蝈',   value: '4' },
+  { label: '🐾 其他',   value: '99' },
 ]
 
 export const pets = [

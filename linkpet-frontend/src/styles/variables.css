@@ -171,15 +171,17 @@ body {
 ============================================================ */
 
 .section {
-  padding: 3.5rem 2rem;
+  padding: 1.5rem 2rem; /* reduced from 5.5rem to fit one screen */
+  max-width: 1240px;
+  margin: 0 auto;
   position: relative;
   overflow: hidden;
 }
 
 .section__header {
   text-align: center;
-  max-width: 640px;
-  margin: 0 auto 2rem;
+  max-width: 680px;
+  margin: 0 auto 1.5rem; /* reduced from 3rem */
 }
 
 .section__tag {

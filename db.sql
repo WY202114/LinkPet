@@ -30,8 +30,8 @@ CREATE TABLE IF NOT EXISTS pet_type (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='宠物分类表';
 
 -- 插入默认宠物分类
-INSERT IGNORE INTO pet_type (name, sort) VALUES 
-('猫', 1), ('狗', 2), ('兔子', 3), ('鸟类', 4), ('其他', 99);
+INSERT IGNORE INTO pet_type (id, name, sort) VALUES 
+(1, '猫', 1), (2, '狗', 2), (3, '鸟', 3), (4, '蝈蝈', 4), (99, '其他', 99);
 
 -- 宠物表
 CREATE TABLE IF NOT EXISTS pet (

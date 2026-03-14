@@ -78,17 +78,12 @@ onMounted(fetchPosts)
 </script>
 
 <style scoped>
-.community-section {
-  background: linear-gradient(180deg, #F0E6CA 0%, #F7EDD8 100%);
-}
-
 /* Post cards grid — same layout as adoption */
 .posts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
   position: relative;
   z-index: 1;
 }
@@ -110,7 +105,7 @@ onMounted(fetchPosts)
 
 .post-card__img-wrap {
   position: relative;
-  height: 140px;
+  height: 180px;
   overflow: hidden;
 }
 .post-card__img {
@@ -161,7 +156,7 @@ onMounted(fetchPosts)
   border: 1px solid rgba(196, 127, 53, 0.1);
 }
 .skeleton-img {
-  height: 140px;
+  height: 180px;
   background: linear-gradient(90deg, #EDD9AB 25%, #F7EDD8 50%, #EDD9AB 75%);
   background-size: 200% 100%;
   animation: skeletonWave 1.5s infinite;

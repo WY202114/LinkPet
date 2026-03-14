@@ -61,7 +61,7 @@ const isFav   = ref(false)
 /* ── Image ── */
 .pet-card__img-wrap {
   position: relative;
-  height: 140px;
+  height: 180px;
   overflow: hidden;
 }
 .pet-card__img {

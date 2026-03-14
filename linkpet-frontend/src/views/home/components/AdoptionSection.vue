@@ -21,7 +21,12 @@
       >
         {{ tab.label }}
       </button>
+      <!-- Add pet button -->
+      <button class="filter-tab filter-tab--add" @click="openAddPet">＋ 发布宠物</button>
     </div>
+
+    <!-- Add pet modal -->
+    <AddPetModal :visible="showAddModal" @close="showAddModal = false" @success="onPetAdded" />
 
     <!-- Loading skeleton -->
     <div v-if="loading" class="pets-grid">
@@ -62,6 +67,7 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 import PetCard from './PetCard.vue'
+import AddPetModal from './AddPetModal.vue'
 import { getPets } from '@/api/pets.js'
 import { getPetTypes } from '@/api/petTypes.js'
 import { formatPet } from '@/utils/format.js'
@@ -73,25 +79,26 @@ const loading    = ref(false)
 const error      = ref('')
 const total      = ref(0)
 const pageSize   = 8
+const showAddModal = ref(false)
 
 // activeFilter holds { value: 'all' | typeId, typeId: number | null }
 const activeFilter = reactive({ value: 'all', typeId: null })
 
 // Filter tabs — starts with "All", extended after /pet-types loads
-const filterTabs = ref([{ label: '🐾 All Pets', value: 'all', typeId: null }])
+const filterTabs = ref([{ label: '🐾 所有宠物', value: 'all', typeId: null }])
 
 // ── Load pet types → build filter tabs ───────────────────────
 const loadPetTypes = async () => {
   try {
     const types = await getPetTypes()
     if (Array.isArray(types) && types.length) {
-      const icons = { cat: '🐱', dog: '🐶', rabbit: '🐰', bird: '🐦' }
+      const icons = { '猫': '🐱', '狗': '🐶', '鸟': '🐦', '蝈蝈': '🦗' }
       const extra = types.map(t => ({
-        label:  `${icons[t.name?.toLowerCase()] ?? '🐾'} ${t.name}`,
+        label:  `${icons[t.name] ?? '🐾'} ${t.name}`,
         value:  t.id,
         typeId: t.id,
       }))
-      filterTabs.value = [{ label: '🐾 All Pets', value: 'all', typeId: null }, ...extra]
+      filterTabs.value = [{ label: '🐾 所有宠物', value: 'all', typeId: null }, ...extra]
     }
   } catch {
     // Keep default tabs if API fails
@@ -127,6 +134,21 @@ const setFilter = (tab) => {
   fetchPets()
 }
 
+// ── Add pet ───────────────────────────────────────────────────
+const openAddPet = () => {
+  const token = localStorage.getItem('lp_token')
+  if (!token) {
+    alert('请先登录后再发布宠物')
+    return
+  }
+  showAddModal.value = true
+}
+
+const onPetAdded = () => {
+  showAddModal.value = false
+  fetchPets()
+}
+
 // ── Init ──────────────────────────────────────────────────────
 onMounted(async () => {
   await loadPetTypes()
@@ -135,18 +157,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.adoption-section {
-  background: var(--warm-white);
-}
-.adoption-section::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  opacity: 0.5;
-}
-
 /* Filter tabs */
 .filter-tabs {
   display: flex;
@@ -168,14 +178,25 @@ onMounted(async () => {
 }
 .filter-tab:hover   { border-color: var(--amber); color: var(--amber-dark); }
 .filter-tab--active { background: var(--amber); border-color: var(--amber); color: white; font-weight: 700; }
+.filter-tab--add {
+  border-style: dashed;
+  border-color: var(--amber);
+  color: var(--amber);
+  font-weight: 700;
+  transition: all 0.25s;
+}
+.filter-tab--add:hover {
+  background: var(--amber);
+  color: white;
+  border-style: solid;
+}
 
 /* Pet cards grid */
 .pets-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
   position: relative;
   z-index: 1;
 }
@@ -197,7 +218,7 @@ onMounted(async () => {
   border: 1px solid rgba(196, 127, 53, 0.1);
   animation: shimmer 1.5s infinite;
 }
-.skeleton-img  { height: 220px; background: linear-gradient(90deg, #EDD9AB 25%, #F7EDD8 50%, #EDD9AB 75%); background-size: 200% 100%; animation: skeletonWave 1.5s infinite; }
+.skeleton-img  { height: 180px; background: linear-gradient(90deg, #EDD9AB 25%, #F7EDD8 50%, #EDD9AB 75%); background-size: 200% 100%; animation: skeletonWave 1.5s infinite; }
 .skeleton-body { padding: 1.2rem 1.3rem 1.4rem; display: flex; flex-direction: column; gap: 0.7rem; }
 .skeleton-line { height: 12px; border-radius: 6px; background: linear-gradient(90deg, #EDD9AB 25%, #F7EDD8 50%, #EDD9AB 75%); background-size: 200% 100%; animation: skeletonWave 1.5s infinite; }
 .skeleton-line--wide   { width: 70%; }

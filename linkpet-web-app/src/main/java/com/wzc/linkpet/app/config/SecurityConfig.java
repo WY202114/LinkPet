@@ -43,7 +43,7 @@ public class SecurityConfig {
                         // 认证接口公开
                         .requestMatchers("/auth/**").permitAll()
                         // 宠物/类型浏览对访客开放
-                        .requestMatchers("/pets/**", "/pet-types/**").permitAll()
+                        .requestMatchers("/pets/**", "/pet-types/**", "/stats/**").permitAll()
                         // Knife4j 文档
                         .requestMatchers("/doc.html", "/webjars/**", "/v3/api-docs/**").permitAll()
                         // 其余接口需要登录

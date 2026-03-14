@@ -1,22 +1,5 @@
 <template>
   <section class="hero">
-    <!-- Painterly layered background -->
-    <div class="hero__canvas"></div>
-    <div class="hero__paint-blobs" aria-hidden="true">
-      <div class="blob blob--1"></div>
-      <div class="blob blob--2"></div>
-      <div class="blob blob--3"></div>
-      <div class="blob blob--4"></div>
-    </div>
-    <!-- Canvas grain -->
-    <div class="hero__grain" aria-hidden="true"></div>
-    <!-- Floating paw decorations -->
-    <div class="hero__paws" aria-hidden="true">
-      <span class="paw paw--1">🐾</span>
-      <span class="paw paw--2">🐾</span>
-      <span class="paw paw--3">🐾</span>
-    </div>
-
     <!-- Main content -->
     <div class="hero__content">
       <p class="hero__eyebrow">
@@ -49,18 +32,18 @@
       <!-- Stats bar -->
       <div class="hero__stats">
         <div class="stat-item">
-          <span class="stat-item__num">2,400+</span>
-          <span class="stat-item__label">Happy Adoptions</span>
+          <span class="stat-item__num">{{ formatNum(stats.adoptionCount) }}</span>
+          <span class="stat-item__label">温馨领养</span>
         </div>
         <div class="stat-sep"></div>
         <div class="stat-item">
-          <span class="stat-item__num">820</span>
-          <span class="stat-item__label">Pets Waiting</span>
+          <span class="stat-item__num">{{ formatNum(stats.petWaitingCount) }}</span>
+          <span class="stat-item__label">宠物等待中</span>
         </div>
         <div class="stat-sep"></div>
         <div class="stat-item">
-          <span class="stat-item__num">12K+</span>
-          <span class="stat-item__label">Community Members</span>
+          <span class="stat-item__num">{{ formatNum(stats.userCount) }}</span>
+          <span class="stat-item__label">社区成员</span>
         </div>
       </div>
     </div>
@@ -69,77 +52,34 @@
 </template>
 
 <script setup>
-// HeroSection has no external dependencies — fully self-contained
+import { reactive, onMounted } from 'vue'
+import { getHomeStats } from '@/api/stats.js'
+
+const stats = reactive({ adoptionCount: 0, petWaitingCount: 0, userCount: 0 })
+
+/** 格式化数字：>=1000 显示为 "1K+"，否则原数 */
+const formatNum = (n) => {
+  if (!n) return '0'
+  if (n >= 1000) return Math.floor(n / 1000) + 'K+'
+  return n.toLocaleString()
+}
+
+onMounted(async () => {
+  try {
+    const data = await getHomeStats()
+    if (data) Object.assign(stats, data)
+  } catch { /* 保留默认 0 */ }
+})
 </script>
 
 <style scoped>
 .hero {
   position: relative;
-  height: calc(100vh - 70px);
-  max-height: calc(100vh - 70px);
+  /* Removed min-height: calc(100vh-70px) to let it wrap content and reduce overall height */
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  padding: 1rem 2rem;
-  background: linear-gradient(160deg, #DEB87A 0%, #C9965A 35%, #8FA878 65%, #C4A455 100%);
-}
-
-/* ── Painterly background ── */
-.hero__canvas {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 90% 80% at 20% 30%, #E8C88A 0%, transparent 60%),
-    radial-gradient(ellipse 70% 60% at 80% 70%, #C4A06A 0%, transparent 50%),
-    radial-gradient(ellipse 60% 70% at 60% 20%, #A8C49A 0%, transparent 50%),
-    linear-gradient(160deg, #DEB87A 0%, #C9965A 35%, #8FA878 65%, #C4A455 100%);
-}
-
-/* ── Animated paint blobs ── */
-.hero__paint-blobs { position: absolute; inset: 0; pointer-events: none; }
-.blob {
-  position: absolute;
-  border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
-  filter: blur(60px);
-  opacity: 0.55;
-  animation: blobFloat 12s ease-in-out infinite;
-}
-.blob--1 { width: 500px; height: 400px; top: -10%; left: -15%; background: #E2A84A; animation-duration: 12s; }
-.blob--2 { width: 350px; height: 350px; top: 30%; right: -8%; background: #7A9E72; animation-duration: 15s; animation-direction: reverse; }
-.blob--3 { width: 280px; height: 280px; bottom: 10%; left: 20%; background: #C47F35; opacity: 0.35; animation-duration: 10s; animation-delay: 3s; }
-.blob--4 { width: 200px; height: 250px; top: 60%; right: 25%; background: #D4B896; opacity: 0.4; animation-duration: 8s; animation-delay: 1s; }
-
-@keyframes blobFloat {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%       { transform: translate(20px, -25px) scale(1.05); }
-  66%       { transform: translate(-15px, 15px) scale(0.97); }
-}
-
-/* ── Grain overlay ── */
-.hero__grain {
-  position: absolute;
-  inset: 0;
-  opacity: 0.09;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* ── Floating paw prints ── */
-.hero__paws { position: absolute; inset: 0; pointer-events: none; }
-.paw {
-  position: absolute;
-  font-size: 2rem;
-  opacity: 0.18;
-  animation: pawDrift 20s ease-in-out infinite;
-}
-.paw--1 { top: 15%; right: 12%; font-size: 2.5rem; animation-delay: 0s; }
-.paw--2 { top: 65%; left: 5%;  font-size: 1.5rem; animation-delay: 7s; }
-.paw--3 { bottom: 20%; right: 35%;               animation-delay: 14s; }
-
-@keyframes pawDrift {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50%       { transform: translateY(-20px) rotate(15deg); }
+  padding: 3rem 2rem 1.5rem;
 }
 
 /* ── Hero content ── */

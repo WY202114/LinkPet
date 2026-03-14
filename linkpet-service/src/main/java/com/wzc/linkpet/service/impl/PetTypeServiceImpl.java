@@ -29,7 +29,7 @@ public class PetTypeServiceImpl implements PetTypeService {
         List<PetType> types = petTypeMapper.selectList(
                 new LambdaQueryWrapper<PetType>()
                         .eq(PetType::getStatus, StatusConstant.ENABLE)
-                        .orderByDesc(PetType::getSort)
+                        .orderByAsc(PetType::getSort)
         );
         return types.stream().map(t -> {
             PetTypeVO vo = new PetTypeVO();
