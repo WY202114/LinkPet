@@ -3,13 +3,17 @@
   <main class="page-main">
     <RouterView />
   </main>
-  <AppFooter />
+  <AppFooter v-if="showFooter" />
 </template>
 
 <script setup>
-import { RouterView } from 'vue-router'
+import { computed } from 'vue'
+import { RouterView, useRoute } from 'vue-router'
 import AppNavbar from '@/views/home/components/AppNavbar.vue'
 import AppFooter from '@/views/home/components/AppFooter.vue'
+
+const route = useRoute()
+const showFooter = computed(() => route.path === '/guide')
 </script>
 
 <style scoped>
