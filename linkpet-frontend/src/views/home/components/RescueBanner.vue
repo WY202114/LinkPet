@@ -1,5 +1,5 @@
 <template>
-  <section class="rescue-banner" id="guide">
+  <section class="rescue-banner">
     <div class="rescue-banner__paint" aria-hidden="true"></div>
     <div class="rescue-banner__grain"  aria-hidden="true"></div>
 
@@ -34,6 +34,7 @@
 <style scoped>
 .rescue-banner {
   position: relative;
+  min-height: calc(100vh - 70px);
   padding: 3.5rem 2rem;
   overflow: hidden;
   display: flex;

@@ -9,10 +9,10 @@
 
       <!-- Desktop links -->
       <div class="nav-links">
-        <a href="#"          class="nav-link nav-link--active">Home</a>
-        <a href="#adoption"  class="nav-link">Adoption Center</a>
-        <a href="#community" class="nav-link">Pet Community</a>
-        <a href="#guide"     class="nav-link">Rescue Guide</a>
+        <router-link to="/"          class="nav-link" active-class="nav-link--active" exact>Home</router-link>
+        <router-link to="/adoption"  class="nav-link" active-class="nav-link--active">Adoption Center</router-link>
+        <router-link to="/community" class="nav-link" active-class="nav-link--active">Pet Community</router-link>
+        <router-link to="/guide"     class="nav-link" active-class="nav-link--active">Rescue Guide</router-link>
       </div>
 
       <!-- Auth area -->
@@ -50,10 +50,10 @@
     <!-- Mobile menu -->
     <Transition name="slide-down">
       <div v-if="mobileOpen" class="nav-mobile">
-        <a href="#"          class="nav-mobile__link" @click="mobileOpen = false">Home</a>
-        <a href="#adoption"  class="nav-mobile__link" @click="mobileOpen = false">Adoption Center</a>
-        <a href="#community" class="nav-mobile__link" @click="mobileOpen = false">Pet Community</a>
-        <a href="#guide"     class="nav-mobile__link" @click="mobileOpen = false">Rescue Guide</a>
+        <router-link to="/"          class="nav-mobile__link" @click="mobileOpen = false">Home</router-link>
+        <router-link to="/adoption"  class="nav-mobile__link" @click="mobileOpen = false">Adoption Center</router-link>
+        <router-link to="/community" class="nav-mobile__link" @click="mobileOpen = false">Pet Community</router-link>
+        <router-link to="/guide"     class="nav-mobile__link" @click="mobileOpen = false">Rescue Guide</router-link>
         <div class="nav-mobile__auth">
           <template v-if="!isLoggedIn">
             <button class="btn-login"    @click="openModal('login');    mobileOpen = false">Login</button>

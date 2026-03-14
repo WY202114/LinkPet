@@ -7,17 +7,30 @@ const routes = [
     component: () => import('@/views/home/index.vue'),
     meta: { title: 'LinkPet — 首页' },
   },
-  // 后续可添加更多路由，例如：
-  // { path: '/adoption', name: 'Adoption', component: () => import('@/views/adoption/index.vue') },
-  // { path: '/community', name: 'Community', component: () => import('@/views/community/index.vue') },
+  {
+    path: '/adoption',
+    name: 'Adoption',
+    component: () => import('@/views/adoption/index.vue'),
+    meta: { title: 'LinkPet — 领养中心' },
+  },
+  {
+    path: '/community',
+    name: 'Community',
+    component: () => import('@/views/community/index.vue'),
+    meta: { title: 'LinkPet — 宠物社区' },
+  },
+  {
+    path: '/guide',
+    name: 'Guide',
+    component: () => import('@/views/guide/index.vue'),
+    meta: { title: 'LinkPet — 救助指南' },
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) return savedPosition
-    if (to.hash) return { el: to.hash, behavior: 'smooth' }
+  scrollBehavior() {
     return { top: 0 }
   },
 })

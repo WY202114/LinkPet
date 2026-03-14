@@ -65,13 +65,6 @@
       </div>
     </div>
 
-    <!-- Scroll hint -->
-    <div class="hero__scroll-hint">
-      <div class="scroll-mouse">
-        <div class="scroll-wheel"></div>
-      </div>
-      <span>Scroll to explore</span>
-    </div>
   </section>
 </template>
 
@@ -82,12 +75,12 @@
 <style scoped>
 .hero {
   position: relative;
-  min-height: 85vh;
+  min-height: calc(100vh - 70px);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 90px 2rem 60px;
+  padding: 2rem;
 }
 
 /* ── Painterly background ── */
@@ -237,47 +230,6 @@
   width: 1px;
   height: 36px;
   background: rgba(196, 127, 53, 0.3);
-}
-
-/* ── Scroll hint ── */
-.hero__scroll-hint {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  opacity: 0.6;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--brown-mid);
-  animation: fadeInUp 1.5s 1s both;
-}
-.scroll-mouse {
-  width: 22px; height: 34px;
-  border: 2px solid currentColor;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  padding-top: 5px;
-}
-.scroll-wheel {
-  width: 3px; height: 7px;
-  background: currentColor;
-  border-radius: 3px;
-  animation: scrollWheel 2s ease-in-out infinite;
-}
-
-@keyframes scrollWheel {
-  0%   { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(10px); opacity: 0; }
-}
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
-  to   { opacity: 0.6; transform: translateX(-50%) translateY(0); }
 }
 
 /* Responsive */

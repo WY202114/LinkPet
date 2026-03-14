@@ -1,7 +1,5 @@
 <template>
-  <section class="section community-section" id="community">
-    <div class="brush-divider brush-divider--warm"></div>
-
+  <section class="section community-section">
     <!-- Section header -->
     <div class="section__header">
       <p class="section__tag">From our LinkPet family</p>

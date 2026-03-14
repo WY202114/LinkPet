@@ -1,7 +1,5 @@
 <template>
-  <section class="section adoption-section" id="adoption">
-    <div class="brush-divider"></div>
-
+  <section class="section adoption-section">
     <!-- Section header -->
     <div class="section__header">
       <p class="section__tag">Ready to find a home</p>
