@@ -58,9 +58,6 @@
       Showing {{ petList.length }} of {{ total }} pets
     </p>
 
-    <div class="section__footer">
-      <button class="btn-view-all">Browse All Available Pets</button>
-    </div>
   </section>
 </template>
 
