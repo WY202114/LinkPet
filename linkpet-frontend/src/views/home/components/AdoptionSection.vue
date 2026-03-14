@@ -28,6 +28,9 @@
     <!-- Add pet modal -->
     <AddPetModal :visible="showAddModal" @close="showAddModal = false" @success="onPetAdded" />
 
+    <!-- Pet detail modal -->
+    <PetDetailModal :visible="showDetailModal" :petId="detailPetId" @close="showDetailModal = false" />
+
     <!-- Loading skeleton -->
     <div v-if="loading" class="pets-grid">
       <div v-for="n in 4" :key="n" class="skeleton-card">
@@ -53,7 +56,7 @@
 
     <!-- Pet cards grid -->
     <div v-else class="pets-grid">
-      <PetCard v-for="pet in petList" :key="pet.id" :pet="pet" />
+      <PetCard v-for="pet in petList" :key="pet.id" :pet="pet" @view="openDetail" />
     </div>
 
     <!-- Pagination info -->
@@ -68,6 +71,7 @@
 import { ref, reactive, onMounted } from 'vue'
 import PetCard from './PetCard.vue'
 import AddPetModal from './AddPetModal.vue'
+import PetDetailModal from './PetDetailModal.vue'
 import { getPets } from '@/api/pets.js'
 import { getPetTypes } from '@/api/petTypes.js'
 import { formatPet } from '@/utils/format.js'
@@ -79,7 +83,9 @@ const loading    = ref(false)
 const error      = ref('')
 const total      = ref(0)
 const pageSize   = 50
-const showAddModal = ref(false)
+const showAddModal    = ref(false)
+const showDetailModal = ref(false)
+const detailPetId     = ref(null)
 
 // activeFilter holds { value: 'all' | typeId, typeId: number | null }
 const activeFilter = reactive({ value: 'all', typeId: null })
@@ -147,6 +153,12 @@ const openAddPet = () => {
 const onPetAdded = () => {
   showAddModal.value = false
   fetchPets()
+}
+
+// ── View pet detail ──────────────────────────────────────────
+const openDetail = (petId) => {
+  detailPetId.value = petId
+  showDetailModal.value = true
 }
 
 // ── Init ──────────────────────────────────────────────────────

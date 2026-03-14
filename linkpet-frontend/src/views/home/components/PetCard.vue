@@ -3,6 +3,7 @@
     class="pet-card"
     @mouseenter="hovered = true"
     @mouseleave="hovered = false"
+    @click="$emit('view', pet.id)"
   >
     <!-- Image -->
     <div class="pet-card__img-wrap">
@@ -39,6 +40,7 @@ defineProps({
     required: true,
   },
 })
+defineEmits(['view'])
 
 const FALLBACK_IMAGES = [
   'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&q=80',

@@ -25,6 +25,12 @@ public class Pet {
     /** 宠物类型 ID（关联 pet_type 表） */
     private Long typeId;
 
+    /** 用户自定义品种名称（选择"其他"时填写，需管理员审核） */
+    private String customTypeName;
+
+    /** 自定义品种审核状态：null-标准品种，0-待审核，1-已通过，2-已拒绝 */
+    private Integer typeReviewStatus;
+
     /** 年龄（月） */
     private Integer ageMonth;
 

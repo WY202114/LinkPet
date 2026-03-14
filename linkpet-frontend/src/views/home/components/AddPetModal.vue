@@ -18,11 +18,23 @@
             </div>
             <div class="form-group">
               <label class="form-label">类型 <span class="required">*</span></label>
-              <select v-model="form.typeId" class="form-input" required>
+              <select v-model="form.typeId" class="form-input" required @change="onTypeChange">
                 <option disabled value="">请选择类型</option>
                 <option v-for="t in petTypes" :key="t.id" :value="t.id">{{ t.name }}</option>
               </select>
             </div>
+          </div>
+
+          <!-- Custom type input (when "其他" is selected) -->
+          <div v-if="isOtherType" class="form-group custom-type-group">
+            <label class="form-label">自定义品种 <span class="required">*</span></label>
+            <input
+              v-model="form.customTypeName"
+              class="form-input"
+              placeholder="请输入自定义品种，如：龙猫、仓鼠"
+              :required="isOtherType"
+            />
+            <p class="custom-type-hint">自定义品种将提交管理员审核，审核通过后将正式生效</p>
           </div>
 
           <!-- Row: ageMonth + gender -->
@@ -94,7 +106,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch } from 'vue'
+import { ref, reactive, computed, watch } from 'vue'
 import { createPet } from '@/api/pets.js'
 import { getPetTypes } from '@/api/petTypes.js'
 import { uploadImage } from '@/api/upload.js'
@@ -110,6 +122,7 @@ const uploadedKeys = ref([])  // MinIO keys returned from server
 const form = reactive({
   name: '',
   typeId: '',
+  customTypeName: '',
   ageMonth: null,
   gender: 0,
   healthDesc: '',
@@ -117,6 +130,19 @@ const form = reactive({
   address: '',
   location: '',
 })
+
+// Check if user selected "其他"
+const isOtherType = computed(() => {
+  if (!form.typeId) return false
+  const selected = petTypes.value.find(t => t.id === form.typeId)
+  return selected?.name === '其他'
+})
+
+const onTypeChange = () => {
+  if (!isOtherType.value) {
+    form.customTypeName = ''
+  }
+}
 
 // Load pet types when modal opens
 watch(() => props.visible, async (val) => {
@@ -154,10 +180,15 @@ const removeImage = (index) => {
 const handleSubmit = async () => {
   submitting.value = true
   try {
-    await createPet({
+    const payload = {
       ...form,
       images: uploadedKeys.value.length ? uploadedKeys.value : null,
-    })
+    }
+    // Only send customTypeName when "其他" is selected
+    if (!isOtherType.value) {
+      delete payload.customTypeName
+    }
+    await createPet(payload)
     alert('发布成功！')
     emit('success')
     close()
@@ -170,7 +201,7 @@ const handleSubmit = async () => {
 
 // ── Close & reset ──────────────────────────────────────────────
 const close = () => {
-  Object.assign(form, { name: '', typeId: '', ageMonth: null, gender: 0, healthDesc: '', personalityDesc: '', address: '', location: '' })
+  Object.assign(form, { name: '', typeId: '', customTypeName: '', ageMonth: null, gender: 0, healthDesc: '', personalityDesc: '', address: '', location: '' })
   previewUrls.value.forEach(u => URL.revokeObjectURL(u))
   previewUrls.value = []
   uploadedKeys.value = []
@@ -260,6 +291,23 @@ const close = () => {
 .form-input:focus { border-color: var(--amber, #C47F35); }
 
 .form-textarea { resize: vertical; }
+
+/* Custom type input */
+.custom-type-group {
+  animation: slideDown 0.25s ease;
+}
+.custom-type-hint {
+  margin: 0.35rem 0 0;
+  font-size: 0.72rem;
+  color: var(--amber-dark, #8B5B1C);
+  opacity: 0.75;
+  line-height: 1.4;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; max-height: 0; transform: translateY(-8px); }
+  to   { opacity: 1; max-height: 120px; transform: translateY(0); }
+}
 
 /* Radio group */
 .radio-group {

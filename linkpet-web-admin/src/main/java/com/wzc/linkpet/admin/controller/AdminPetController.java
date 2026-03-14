@@ -39,4 +39,21 @@ public class AdminPetController {
         petService.delete(id);
         return Result.success();
     }
+
+    @Operation(summary = "查询待审核的自定义品种列表")
+    @GetMapping("/type-reviews")
+    public Result<PageResult<PetVO>> typeReviews(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int pageSize) {
+        return Result.success(petService.pendingTypeReviews(page, pageSize));
+    }
+
+    @Operation(summary = "审核自定义品种")
+    @PutMapping("/{id}/type-review")
+    public Result<Void> reviewType(
+            @PathVariable Long id,
+            @RequestParam boolean approved) {
+        petService.reviewCustomType(id, approved);
+        return Result.success();
+    }
 }

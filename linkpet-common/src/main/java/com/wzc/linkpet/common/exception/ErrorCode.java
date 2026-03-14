@@ -28,6 +28,7 @@ public enum ErrorCode {
     PET_NOT_FOUND(2001, "宠物不存在"),
     PET_TYPE_NOT_FOUND(2002, "宠物类型不存在"),
     PET_NOT_AVAILABLE(2003, "该宠物当前不可领养"),
+    PET_TYPE_REVIEW_NOT_PENDING(2004, "该品种审核已处理，无法重复操作"),
 
     // ==================== 领养模块 ====================
     ADOPTION_NOT_FOUND(3001, "领养申请不存在"),

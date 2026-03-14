@@ -39,4 +39,16 @@ public interface PetService {
      * 查询当前用户发布的宠物列表
      */
     PageResult<PetVO> myPets(int page, int pageSize);
+
+    /**
+     * 查询待审核的自定义品种列表（管理端）
+     */
+    PageResult<PetVO> pendingTypeReviews(int page, int pageSize);
+
+    /**
+     * 审核自定义品种（管理端）
+     * @param petId 宠物 ID
+     * @param approved true=批准（创建新品种并更新宠物类型），false=拒绝
+     */
+    void reviewCustomType(Long petId, boolean approved);
 }

@@ -20,6 +20,9 @@ public class PetDTO {
     @NotNull(message = "宠物类型不能为空")
     private Long typeId;
 
+    /** 用户自定义品种名称（选择"其他"时填写） */
+    private String customTypeName;
+
     /** 年龄（月） */
     private Integer ageMonth;
 

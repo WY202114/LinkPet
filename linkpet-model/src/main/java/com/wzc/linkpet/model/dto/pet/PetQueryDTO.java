@@ -23,6 +23,9 @@ public class PetQueryDTO {
     /** 发布用户 ID（用于"我的宠物"查询） */
     private Long userId;
 
+    /** 品种审核状态（管理端筛选用） */
+    private Integer typeReviewStatus;
+
     /** 当前页，从 1 开始，默认 1 */
     private int page = 1;
 

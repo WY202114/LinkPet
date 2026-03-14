@@ -8,6 +8,8 @@
         <result column="name" property="name"/>
         <result column="type_id" property="typeId"/>
         <result column="type_name" property="typeName"/>
+        <result column="custom_type_name" property="customTypeName"/>
+        <result column="type_review_status" property="typeReviewStatus"/>
         <result column="age_month" property="ageMonth"/>
         <result column="gender" property="gender"/>
 <!--        <result column="health_desc" property="healthDesc"/>-->
@@ -18,6 +20,7 @@
         <result column="location" property="location"/>
         <result column="user_id" property="userId"/>
         <result column="user_nickname" property="userNickname"/>
+        <result column="user_avatar" property="userAvatar"/>
         <result column="status" property="status"/>
         <result column="create_time" property="createTime"/>
     </resultMap>
@@ -31,6 +34,8 @@
                p.name,
                p.type_id,
                pt.name AS type_name,
+               p.custom_type_name,
+               p.type_review_status,
                p.age_month,
                p.gender,
                p.description,
@@ -39,6 +44,7 @@
                p.location,
                p.user_id,
                u.nickname AS user_nickname,
+               u.avatar   AS user_avatar,
                p.status,
                p.create_time
         FROM pet p
@@ -60,8 +66,36 @@
             <if test="query.userId != null">
                 AND p.user_id = #{query.userId}
             </if>
+            <if test="query.typeReviewStatus != null">
+                AND p.type_review_status = #{query.typeReviewStatus}
+            </if>
         </where>
         ORDER BY p.create_time DESC
+    </select>
+
+    <!-- 根据 ID 查询宠物详情（含关联信息） -->
+    <select id="selectPetById" resultMap="PetVOMap">
+        SELECT p.id,
+               p.name,
+               p.type_id,
+               pt.name AS type_name,
+               p.custom_type_name,
+               p.type_review_status,
+               p.age_month,
+               p.gender,
+               p.description,
+               p.images,
+               p.address,
+               p.location,
+               p.user_id,
+               u.nickname AS user_nickname,
+               u.avatar   AS user_avatar,
+               p.status,
+               p.create_time
+        FROM pet p
+                 LEFT JOIN pet_type pt ON p.type_id = pt.id
+                 LEFT JOIN user u ON p.user_id = u.id
+        WHERE p.id = #{id}
     </select>
 
 </mapper>

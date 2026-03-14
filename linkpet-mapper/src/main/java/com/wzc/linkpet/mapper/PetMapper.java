@@ -23,4 +23,9 @@ public interface PetMapper extends BaseMapper<Pet> {
      * @return 分页结果
      */
     IPage<PetVO> selectPetPage(Page<PetVO> page, @Param("query") PetQueryDTO query);
+
+    /**
+     * 根据 ID 查询宠物详情（关联类型名称、发布者昵称和头像）
+     */
+    PetVO selectPetById(@Param("id") Long id);
 }

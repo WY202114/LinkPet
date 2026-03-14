@@ -40,6 +40,17 @@ public class StatusConstant {
     /** 领养申请：已拒绝 */
     public static final Integer ADOPTION_REJECTED = 2;
 
+    // ==================== 自定义品种审核状态 ====================
+
+    /** 品种审核：待审核 */
+    public static final Integer TYPE_REVIEW_PENDING = 0;
+
+    /** 品种审核：已通过 */
+    public static final Integer TYPE_REVIEW_APPROVED = 1;
+
+    /** 品种审核：已拒绝 */
+    public static final Integer TYPE_REVIEW_REJECTED = 2;
+
     // ==================== 帖子状态 ====================
 
     /** 帖子：正常可见 */
