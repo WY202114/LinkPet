@@ -75,12 +75,13 @@
 <style scoped>
 .hero {
   position: relative;
-  min-height: calc(100vh - 70px);
+  height: calc(100vh - 70px);
+  max-height: calc(100vh - 70px);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 2rem;
+  padding: 1rem 2rem;
 }
 
 /* ── Painterly background ── */
@@ -158,7 +159,7 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--amber-dark);
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.8rem;
   opacity: 0.85;
 }
 .eyebrow-line {
@@ -174,7 +175,7 @@
   font-weight: 700;
   line-height: 1.18;
   color: var(--brown);
-  margin-bottom: 1.4rem;
+  margin-bottom: 0.8rem;
   text-shadow: 3px 4px 12px rgba(61, 43, 31, 0.22);
 }
 .hero__title em {
@@ -187,7 +188,7 @@
   line-height: 1.75;
   color: var(--brown-mid);
   max-width: 560px;
-  margin: 0 auto 2.5rem;
+  margin: 0 auto 1.5rem;
   opacity: 0.9;
 }
 
@@ -196,7 +197,7 @@
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 3.5rem;
+  margin-bottom: 1.5rem;
 }
 
 /* ── Stats bar ── */
