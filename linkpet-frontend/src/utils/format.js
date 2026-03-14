@@ -51,8 +51,8 @@ export const formatPet = (pet, index = 0) => ({
   typeKey:  (pet.typeName || '').toLowerCase(),
   age:      formatAge(pet.ageMonth),
   location: pet.address || pet.location || '',
-  tags:     formatTags(pet.personalityDesc),
-  desc:     pet.healthDesc || pet.personalityDesc || '',
+  tags:     formatTags(pet.description),
+  desc:     pet.description || '',
   image:    pet.images?.length
               ? getImageUrl(pet.images[0])
               : PET_FALLBACK[index % PET_FALLBACK.length],

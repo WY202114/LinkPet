@@ -69,7 +69,7 @@ const isFav   = ref(false)
 <style scoped>
 .pet-card {
   background: var(--cream);
-  border-radius: 16px 16px 14px 14px;
+  border-radius: 12px 12px 10px 10px;
   overflow: hidden;
   box-shadow: 0 6px 28px var(--warm-shadow), 0 2px 8px rgba(196, 127, 53, 0.08);
   transition: transform 0.35s ease, box-shadow 0.35s ease;
@@ -83,7 +83,7 @@ const isFav   = ref(false)
 /* ── Image ── */
 .pet-card__img-wrap {
   position: relative;
-  height: 220px;
+  height: 120px;
   overflow: hidden;
 }
 .pet-card__img {
@@ -111,23 +111,23 @@ const isFav   = ref(false)
 /* Badges */
 .badge {
   position: absolute;
-  top: 12px;
-  font-size: 0.7rem;
+  top: 8px;
+  font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 0.28rem 0.75rem;
-  border-radius: 20px;
+  padding: 0.2rem 0.55rem;
+  border-radius: 16px;
 }
 .badge--type {
-  left: 12px;
+  left: 8px;
   background: rgba(247, 237, 216, 0.88);
   color: var(--amber-dark);
   border: 1px solid rgba(196, 127, 53, 0.3);
   backdrop-filter: blur(6px);
 }
 .badge--urgent {
-  right: 12px;
+  right: 8px;
   background: rgba(180, 60, 40, 0.88);
   color: #fff;
   backdrop-filter: blur(6px);
@@ -136,12 +136,12 @@ const isFav   = ref(false)
 /* Favourite button */
 .pet-card__fav {
   position: absolute;
-  bottom: 12px; right: 12px;
+  bottom: 8px; right: 8px;
   background: rgba(247, 237, 216, 0.8);
   border: none;
   border-radius: 50%;
-  width: 32px; height: 32px;
-  font-size: 1rem;
+  width: 26px; height: 26px;
+  font-size: 0.8rem;
   cursor: pointer;
   backdrop-filter: blur(6px);
   transition: transform 0.2s;
@@ -150,49 +150,49 @@ const isFav   = ref(false)
 .pet-card__fav:hover { transform: scale(1.2); }
 
 /* ── Card body ── */
-.pet-card__body { padding: 1.2rem 1.3rem 1.4rem; }
+.pet-card__body { padding: 0.5rem 0.75rem 0.65rem; }
 
 .pet-card__row {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.2rem;
 }
 .pet-card__name {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--brown);
 }
 .pet-card__age {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: var(--brown-mid);
   opacity: 0.7;
   background: rgba(196, 127, 53, 0.12);
-  padding: 0.15rem 0.55rem;
-  border-radius: 10px;
+  padding: 0.1rem 0.4rem;
+  border-radius: 8px;
 }
 
 .pet-card__location {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
-  font-size: 0.78rem;
+  gap: 0.2rem;
+  font-size: 0.7rem;
   color: var(--green-vintage);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.25rem;
   opacity: 0.85;
 }
 
 .pet-card__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-bottom: 0.85rem;
+  gap: 0.3rem;
+  margin-bottom: 0.3rem;
 }
 .pet-tag {
-  font-size: 0.72rem;
-  padding: 0.22rem 0.65rem;
-  border-radius: 12px;
+  font-size: 0.62rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 10px;
   background: rgba(74, 103, 65, 0.12);
   color: var(--green-vintage);
   border: 1px solid rgba(74, 103, 65, 0.2);
@@ -201,13 +201,13 @@ const isFav   = ref(false)
 }
 
 .pet-card__desc {
-  font-size: 0.85rem;
-  line-height: 1.65;
+  font-size: 0.72rem;
+  line-height: 1.5;
   color: var(--brown-mid);
-  margin-bottom: 1.1rem;
+  margin-bottom: 0.35rem;
   opacity: 0.88;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -215,10 +215,10 @@ const isFav   = ref(false)
 .btn-details {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1.2rem;
+  gap: 0.3rem;
+  padding: 0.35rem 0.9rem;
   font-family: var(--font-sans);
-  font-size: 0.85rem;
+  font-size: 0.72rem;
   font-weight: 700;
   border: 1.5px solid var(--amber);
   background: transparent;

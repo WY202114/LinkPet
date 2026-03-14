@@ -34,7 +34,7 @@
 <style scoped>
 .rescue-banner {
   position: relative;
-  padding: 6rem 2rem;
+  padding: 3.5rem 2rem;
   overflow: hidden;
   display: flex;
   align-items: center;

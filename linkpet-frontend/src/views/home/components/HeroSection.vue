@@ -82,12 +82,12 @@
 <style scoped>
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 120px 2rem 80px;
+  padding: 90px 2rem 60px;
 }
 
 /* ── Painterly background ── */

@@ -157,7 +157,7 @@ onMounted(async () => {
   display: flex;
   justify-content: center;
   gap: 0.7rem;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   flex-wrap: wrap;
 }
 .filter-tab {
@@ -177,8 +177,8 @@ onMounted(async () => {
 /* Pet cards grid */
 .pets-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
