@@ -78,7 +78,7 @@ const petList    = ref([])
 const loading    = ref(false)
 const error      = ref('')
 const total      = ref(0)
-const pageSize   = 8
+const pageSize   = 50
 const showAddModal = ref(false)
 
 // activeFilter holds { value: 'all' | typeId, typeId: number | null }

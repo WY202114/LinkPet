@@ -11,6 +11,7 @@
         :alt="pet.name"
         class="pet-card__img"
         :class="{ 'pet-card__img--hovered': hovered }"
+        @error="onImgError"
       />
       <div class="pet-card__paint-overlay"></div>
 
@@ -39,8 +40,22 @@ defineProps({
   },
 })
 
+const FALLBACK_IMAGES = [
+  'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&q=80',
+  'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=500&q=80',
+  'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=500&q=80',
+  'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=500&q=80',
+]
+
 const hovered = ref(false)
 const isFav   = ref(false)
+
+const onImgError = (e) => {
+  const fallback = FALLBACK_IMAGES[Math.floor(Math.random() * FALLBACK_IMAGES.length)]
+  if (e.target.src !== fallback) {
+    e.target.src = fallback
+  }
+}
 </script>
 
 <style scoped>

@@ -31,11 +31,8 @@ public class Pet {
     /** 性别：0-未知，1-雄，2-雌 */
     private Integer gender;
 
-//    /** 健康状况描述 */
-//    private String healthDesc;
-
-//    /** 性格描述 */
-//    private String personalityDesc;
+    /** 描述 */
+    private String description;
 
     /** 宠物图片（JSON 数组存储） */
     @TableField(typeHandler = JacksonTypeHandler.class)

@@ -14,7 +14,7 @@ import http from '@/utils/http.js'
  * @returns {Promise<{ records, total, page, pageSize }>}
  */
 export const getPets = (params = {}) =>
-  http.get('/pets', { params: { page: 1, pageSize: 8, ...params } })
+  http.get('/pets', { params: { page: 1, pageSize: 50, ...params } })
 
 /**
  * 获取宠物详情

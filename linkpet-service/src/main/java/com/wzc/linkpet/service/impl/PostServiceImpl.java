@@ -20,6 +20,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -95,8 +98,20 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void delete(Long id) {
-        if (postMapper.selectById(id) == null) {
+        Post post = postMapper.selectById(id);
+        if (post == null) {
             throw new BusinessException(ErrorCode.POST_NOT_FOUND);
+        }
+        // 只有管理员或帖子作者可以删除
+        Long currentUserId = BaseContext.getCurrentId();
+        boolean isAdmin = false;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            isAdmin = auth.getAuthorities().stream()
+                    .anyMatch(a -> "ROLE_ADMIN".equals(a.getAuthority()));
+        }
+        if (!isAdmin && !post.getUserId().equals(currentUserId)) {
+            throw new BusinessException(ErrorCode.FORBIDDEN);
         }
         postMapper.deleteById(id);
     }
